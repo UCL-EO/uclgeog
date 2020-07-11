@@ -1,47 +1,40 @@
 name: test
 
-# trigger conditions
-# for workflow_dispatch the
-# name can trigger different
-# things. This is the manual trigger.
 on:
   workflow_dispatch:
     inputs:
       name:
         description: 'name'
         required: true
-        default: 'doit'
+        default: 'Update Docker'
   push:
   schedule:
     - cron: '0 0 * * *'
 
 jobs:
-  job_1:
-    name: install repo
-    build:
-      runs-on: ubuntu-latest
-      steps:
-      # set the repo in the distribution
-      # we want this to happen before the other events
-        name: stage 1 -- checkout files in repo
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "${{ github.event.inputs.name }}"
 
+    - name: checkout files in repo
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
 
-  job_2:
-    name: build and install docker
-    needs: job_1
-    # this is a manual doit trigger
-    # here, we set up the docker
-    if: github.event.inputs.name == 'doit'
-    uses: machine-learning-apps/repo2docker-action@0.2
-    with:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      IMAGE_NAME: "proflewis/uclgeog"
-      NOTEBOOK_USER: "uclgeog"
-      BINDER_CACHE: false
-      PUBLIC_REGISTRY_CHECK: true
+    - name: 'not manual action'
+      if: github.event.inputs.name != 'Update Docker'
+      run: echo "Hello ${{ github.event.inputs.name }}"
 
- 
+    - name: 'manual action'
+      # docker update only on manual at the momnent
+      if: github.event.inputs.name == 'Update Docker'
+      uses: machine-learning-apps/repo2docker-action@0.2
+      with:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        IMAGE_NAME: "proflewis/uclgeog"
+        NOTEBOOK_USER: "uclgeog"
+        BINDER_CACHE: false
+        PUBLIC_REGISTRY_CHECK: true
