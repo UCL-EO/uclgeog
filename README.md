@@ -1,22 +1,16 @@
-# Welcome to uclgeog: Scientific Computing 
-UCL Geography: Level 7 course, Scientific Computing
-
-
+# Welcome to uclgeog: Computing Core
+UCL Geography: Computing core setup for python and jupyter
 
 ![](images/ucl_logo.png)
-
-[![Anaconda-Server Badge](https://anaconda.org/proflewis/uclgeog/badges/platforms.svg)](https://anaconda.org/proflewis/uclgeog)
-[![Anaconda-Server Badge](https://anaconda.org/proflewis/uclgeog/badges/latest_release_date.svg)](https://anaconda.org/proflewis/uclgeog)
-[![Anaconda-Server Badge](https://anaconda.org/proflewis/uclgeog/badges/version.svg)](https://anaconda.org/proflewis/uclgeog)
-[![Anaconda-Server Badge](https://anaconda.org/proflewis/uclgeog/badges/downloads.svg)](https://anaconda.org/proflewis/uclgeog)
-[![Anaconda-Server Badge](https://anaconda.org/proflewis/uclgeog/badges/installer/conda.svg)](https://conda.anaconda.org/proflewis)
 
 ![test](https://github.com/UCL-EO/uclgeog/workflows/test/badge.svg)
 
 [![docker pulls](https://img.shields.io/docker/pulls/proflewis/uclgeog.svg)](https://hub.docker.com/proflewis/uclgeog) [![docker stars](https://img.shields.io/docker/stars/proflewis/uclgeog.svg)](https://hub.docker.com/r/proflewis/uclgeog) 
 [![metadata](https://images.microbadger.com/badges/image/proflewis/uclgeog.svg)](https://microbadger.com/images/proflewis/uclgeog "proflewis/uclgeog image metadata")
 
-This repository contains the core settings for software  several UCL MSc Geography courses.
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCL-EO/uclgeog.git/master)
+
+This repository contains the core settings for software several UCL Geography courses.
 
 It is designed to allow users to install the software necessary to partipate in these courses.
 
@@ -35,7 +29,13 @@ First then, install [Docker](https://www.docker.com/products/docker-desktop) on 
 Pull docker image and test
 -----------------
 
-Next, pull the docker image and run a test notebook. In a terminal, type:
+Next, pull the docker image and run a test. In a terminal, type:
+
+	docker run proflewis/uclgeog bash -c "cat meta.yaml| grep version"
+	
+which should print out the version number. If this is up to date it should show the same version number as in [meta.yaml](meta.yaml).
+
+To run jupyter (to run notebooks):
 
 	docker run -p 8888:8888 proflewis/uclgeog 
 
@@ -67,8 +67,9 @@ To install the repo conda package:
 Other information
 -----------------
 
-For reference, the docker file is stored on [docker hub](https://hub.docker.com/r/proflewis/uclgeog).
+For reference:
 
-The script [bin/dockerMe](bin/dockerMe) contains all of the docker commands you might need to create such a docker image yourself.
-
-This docker file is derived from [jupyter/base-notebook](https://hub.docker.com/r/jupyter/base-notebook/).
+* the docker file is stored on [hub.docker.com](https://hub.docker.com/r/proflewis/uclgeog).
+* the codebase is stored on [anaconda.org](https://anaconda.org/profLewis/uclgeog).
+* the git is stored on [github.com](https://github.com/UCL-EO/uclgeog).
+* the binder is stored on [mybinder.org](https://mybinder.org/v2/gh/UCL-EO/uclgeog.git/master)
