@@ -22,7 +22,7 @@ jobs:
     
     # set the repo in the distribution
     # we want this to happen before the other events
-    - name: stage 1 : checkout files in repo
+    - name: stage 1 -- checkout files in repo
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
