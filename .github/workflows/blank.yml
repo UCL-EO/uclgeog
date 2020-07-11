@@ -33,20 +33,20 @@ jobs:
       if: github.event.inputs.name != 'doit'
       uses: actions/download-artifact@v1
         with:
-          name: .info 
+          name: info 
      - shell: bash
-       # believe it or not, the way to pass variables is via files 
-       # seems rather primitive and could suffer race problems
-       # so you have to make them sequential jobs
+     # believe it or not, the way to pass variables is via files 
+     # seems rather primitive and could suffer race problems
+     # so you have to make them sequential jobs
      - shell: bash
       run: |
       value=`python -c "import yaml; f=open('meta.yaml','r');l=yaml.safe_load(f);print(l['package']['name'])"`
-      echo $value >  git_name.dat
+      echo $value > info/git_name.dat
     - name: get name
       uses: actions/upload-artifact@v1
       with:
-        name: .info
-        path: .info/git_name.dat
+        name: info
+        path: info/git_name.dat
  
 - name: 'manual action with codename: doit'
       # this is a manual doit trigger
