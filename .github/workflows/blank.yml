@@ -46,9 +46,5 @@ jobs:
         NOTEBOOK_USER: "uclgeog"
         BINDER_CACHE: false
         PUBLIC_REGISTRY_CHECK: true
-    inputs:
-      name:
-        description: 'name'
-        required: true
-        default: 'Update Docker'
+
         
