@@ -17,8 +17,10 @@ jobs:
     steps:
     - run: |
         echo "${{ github.event.inputs.name }}"
-        codebase=`grep name meta.yaml|awk -F: '{print $2}'`
-        echo"codebase is ${codebase}"
+        ls
+        pwd
+        #codebase=`grep name meta.yaml|awk -F: '{print $2}'`
+        #echo"codebase is ${codebase}"
 
     - name: checkout files in repo
       uses: actions/checkout@v2
