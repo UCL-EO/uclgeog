@@ -1,15 +1,16 @@
 name: test
 
-on:
-  workflow_dispname: test
-  
+# trigger conditions
+# for workflow_dispatch the
+# name can trigger different
+# things. This is the manual trigger.
 on:
   workflow_dispatch:
     inputs:
       name:
         description: 'name'
         required: true
-        default: 'Update Docker'
+        default: 'doit'
   push:
   schedule:
     - cron: '0 0 * * *'
@@ -18,21 +19,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - run: pwd
     
-
-    - name: checkout files in repo
+    # set the repo in the distribution
+    # we want this to happen before the other events
+    - name: stage 1 : checkout files in repo
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
-    - name: 'not manual action'
-      if: github.event.inputs.name != 'Update Docker'
+    - name: '*not* action with codename: doit'
+      # this is not a manual doit trigger
+      # it some other trigger, so for example
+      # will go off on push and the cron 
+      if: github.event.inputs.name != 'doit'
       run: echo "Hello ${{ github.event.inputs.name }}"
+      run: pwd
+      run: ls ../*
 
-    - name: 'manual action'
-      # docker update only on manual at the momnent
-      if: github.event.inputs.name == 'Update Docker'
+    - name: 'manual action with codename: doit'
+      # this is a manual doit trigger
+      # here, we set up the docker
+      if: github.event.inputs.name == 'doit'
       uses: machine-learning-apps/repo2docker-action@0.2
       with:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -46,45 +53,4 @@ jobs:
         description: 'name'
         required: true
         default: 'Update Docker'
-  push:
-  schedule:
-    - cron: '0 0 * * *'
-      
-jobs:
-   job2:
-     needs: job1
-   build: 
-     runs-on: ubuntu-latest
-     steps:     
-     - run: pwd   
-#codebase=`grep name meta.yaml|awk -F: '{print $2}'`
-#echo"codebase is ${codebase}"
-      
-   job1:
-   build:
-       runs-on: ubuntu-latest
-       steps:     
-       - run: pwd
-   
-       - name: checkout files in repo
-         uses: actions/checkout@v2
-         with:
-           ref: ${{ github.event.pull_request.head.sha }}  
         
-
-       - name: 'not manual action'
-         if: github.event.inputs.name != 'Update Docker'
-         run: echo "Hello ${{ github.event.inputs.name }}"
-  
-       - name: 'manual action'
-          # docker update only on manual at the momnent   
-         if: github.event.inputs.name == 'Update Docker'
-         uses: machine-learning-apps/repo2docker-action@0.2
-         with:
-           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-           IMAGE_NAME: "proflewis/uclgeog"
-           NOTEBOOK_USER: "uclgeog"
-           BINDER_CACHE: false
-           PUBLIC_REGISTRY_CHECK: true
-
