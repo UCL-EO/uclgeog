@@ -16,7 +16,7 @@ from uclgeog.get_modis_files import get_modis_files
 
 
 
-def get_world( borders_url = "https://raw.githubusercontent.com/UCL-EO/uclgeog_core/master/data",\
+def get_world( borders_url = "https://raw.githubusercontent.com/UCL-EO/uclgeog/master/data",\
                file="TM_WORLD_BORDERS-0.3.zip",\
                data='data',force=False):
   '''

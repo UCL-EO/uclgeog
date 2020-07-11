@@ -1,4 +1,4 @@
-# Welcome to uclgeog_core: Scientific Computing 
+# Welcome to uclgeog: Scientific Computing 
 UCL Geography: Level 7 course, Scientific Computing
 
 
@@ -11,7 +11,7 @@ UCL Geography: Level 7 course, Scientific Computing
 [![Anaconda-Server Badge](https://anaconda.org/proflewis/uclgeog/badges/downloads.svg)](https://anaconda.org/proflewis/uclgeog)
 [![Anaconda-Server Badge](https://anaconda.org/proflewis/uclgeog/badges/installer/conda.svg)](https://conda.anaconda.org/proflewis)
 
-![test](https://github.com/UCL-EO/uclgeog_core/workflows/test/badge.svg)
+![test](https://github.com/UCL-EO/uclgeog/workflows/test/badge.svg)
 
 [![docker pulls](https://img.shields.io/docker/pulls/proflewis/uclgeog.svg)](https://hub.docker.com/proflewis/uclgeog) [![docker stars](https://img.shields.io/docker/stars/proflewis/uclgeog.svg)](https://hub.docker.com/r/proflewis/uclgeog) 
 [![metadata](https://images.microbadger.com/badges/image/proflewis/uclgeog.svg)](https://microbadger.com/images/proflewis/uclgeog "proflewis/uclgeog image metadata")

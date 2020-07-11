@@ -4,7 +4,7 @@ package:
 
 source:
   git_rev: 1.0.0
-  git_url: https://github.com/UCL-EO/uclgeog_core
+  git_url: https://github.com/UCL-EO/uclgeog
 
 build:
   noarch: python
@@ -25,4 +25,4 @@ test:
     - uclgeog
 
 about:
-  home: https://github.com/UCL-EO/uclgeog_core
+  home: https://github.com/UCL-EO/uclgeog
