@@ -1,7 +1,46 @@
 name: test
 
 on:
+  workflow_dispname: test
+  
+on:
   workflow_dispatch:
+    inputs:
+      name:
+        description: 'name'
+        required: true
+        default: 'Update Docker'
+  push:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - run: pwd
+    
+
+    - name: checkout files in repo
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: 'not manual action'
+      if: github.event.inputs.name != 'Update Docker'
+      run: echo "Hello ${{ github.event.inputs.name }}"
+
+    - name: 'manual action'
+      # docker update only on manual at the momnent
+      if: github.event.inputs.name == 'Update Docker'
+      uses: machine-learning-apps/repo2docker-action@0.2
+      with:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        IMAGE_NAME: "proflewis/uclgeog"
+        NOTEBOOK_USER: "uclgeog"
+        BINDER_CACHE: false
+        PUBLIC_REGISTRY_CHECK: trueatch:
     inputs:
       name:
         description: 'name'
@@ -18,8 +57,6 @@ jobs:
      runs-on: ubuntu-latest
      steps:     
      - run: pwd   
-     - run: ls -l    
-
 #codebase=`grep name meta.yaml|awk -F: '{print $2}'`
 #echo"codebase is ${codebase}"
       
