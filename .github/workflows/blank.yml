@@ -33,8 +33,6 @@ jobs:
       # will go off on push and the cron 
       if: github.event.inputs.name != 'doit'
       run: echo "Hello ${{ github.event.inputs.name }}"
-      run: pwd
-      run: ls ../*
 
     - name: 'manual action with codename: doit'
       # this is a manual doit trigger
