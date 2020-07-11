@@ -4,7 +4,7 @@ rm -rf *egg*
 rm -rf dist/*
 here=`pwd`
 
-python setup.py install
+#python setup.py install
 
 codebase=`grep name meta.yaml|awk -F: '{print $2}'`
 echo "--------------------"
@@ -12,7 +12,7 @@ echo "# conda codebase: $codebase"
 echo "--------------------"
 
 
-conda env update --file environment.yml
+conda env create -n "codebase"  --file environment.yml
 conda activate $codebase
 echo "--------------------"
 echo "# conda config"
