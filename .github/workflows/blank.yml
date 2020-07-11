@@ -32,8 +32,8 @@ jobs:
       # it some other trigger, so for example
       # will go off on push and the cron 
       if: github.event.inputs.name != 'doit'
-      run: echo "Hello ${{ github.event.inputs.name }}"
-
+      run: ls -l
+      
     - name: 'manual action with codename: doit'
       # this is a manual doit trigger
       # here, we set up the docker
