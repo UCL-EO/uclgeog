@@ -5,6 +5,8 @@ channels:
 dependencies:
   - conda
   - python=3.7
+  - anaconda-client
+  - conda-build
   - nb_conda_kernels
   - libgdal
   - geopandas
