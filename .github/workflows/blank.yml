@@ -22,7 +22,6 @@ jobs:
       #echo"codebase is ${codebase}"
 
     - name: checkout files in repo
-      if: github.event.inputs.name == 'Update Docker'
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
