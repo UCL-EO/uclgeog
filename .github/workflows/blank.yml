@@ -14,17 +14,17 @@ on:
 jobs:
    job2:
      needs: job1
-     build: 
-       runs-on: ubuntu-latest
-       steps:     
-       - run: pwd   
-       - run: ls -l    
+   build: 
+     runs-on: ubuntu-latest
+     steps:     
+     - run: pwd   
+     - run: ls -l    
 
 #codebase=`grep name meta.yaml|awk -F: '{print $2}'`
 #echo"codebase is ${codebase}"
       
    job1:
-     build:
+   build:
        runs-on: ubuntu-latest
        steps:     
        - run: pwd
