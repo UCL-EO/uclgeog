@@ -26,15 +26,29 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
-
     - name: '*not* action with codename: doit'
       # this is not a manual doit trigger
       # it some other trigger, so for example
       # will go off on push and the cron 
       if: github.event.inputs.name != 'doit'
-      run: python -c "import yaml; f=open('meta.yaml','r');l=yaml.safe_load(f);print(l['package']['name'])"   
-      
-    - name: 'manual action with codename: doit'
+      uses: actions/download-artifact@v1
+        with:
+          name: .info 
+     - shell: bash
+       # believe it or not, the way to pass variables is via files 
+       # seems rather primitive and could suffer race problems
+       # so you have to make them sequential jobs
+     - shell: bash
+      run: |
+      value=`python -c "import yaml; f=open('meta.yaml','r');l=yaml.safe_load(f);print(l['package']['name'])"`
+      echo $value >  git_name.dat
+    - name: get name
+      uses: actions/upload-artifact@v1
+      with:
+        name: .info
+        path: .info/git_name.dat
+ 
+- name: 'manual action with codename: doit'
       # this is a manual doit trigger
       # here, we set up the docker
       if: github.event.inputs.name == 'doit'
@@ -47,4 +61,21 @@ jobs:
         BINDER_CACHE: false
         PUBLIC_REGISTRY_CHECK: true
 
-        
+  job_2:
+    name: Multiply by 9
+    #needs: job_1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v1
+        with:
+          name: homework
+      - shell: bash
+        run: |
+          value=`cat homework/math-homework.txt`
+          expr $value \* 9 > homework/math-homework.txt
+      - name: Upload math result for job 2
+        uses: actions/upload-artifact@v1
+        with:
+          name: homework
+          path: homework/math-homework.txt
