@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - run: ls ..
+    - run: ls -l meta.yaml
       shell: bash
       
     - run: pwd
