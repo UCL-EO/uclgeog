@@ -17,8 +17,8 @@ jobs:
     steps:
     - run: |
         echo "${{ github.event.inputs.name }}"
-        ls
-        pwd
+        ls -l
+        #pwd
         #codebase=`grep name meta.yaml|awk -F: '{print $2}'`
         #echo"codebase is ${codebase}"
 
