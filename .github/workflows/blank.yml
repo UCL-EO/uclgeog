@@ -15,13 +15,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - run: ls -l
+    - run: ls ..
+      shell: bash
+      
+    - run: pwd
       shell: bash
       #pwd
       #codebase=`grep name meta.yaml|awk -F: '{print $2}'`
       #echo"codebase is ${codebase}"
 
     - name: checkout files in repo
+      if: github.event.inputs.name == 'Update Docker'
       uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.sha }}
