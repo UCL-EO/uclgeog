@@ -1,4 +1,4 @@
-name: msc_core 
+name: uclgeog
 channels:
   - conda-forge
   - defaults
