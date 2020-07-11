@@ -32,7 +32,7 @@ jobs:
       # it some other trigger, so for example
       # will go off on push and the cron 
       if: github.event.inputs.name != 'doit'
-      run: ls -l
+      run: python -c "import yaml; f=open('meta.yaml','r');l=yaml.safe_load(f);print(l['package']['name'])"   
       
     - name: 'manual action with codename: doit'
       # this is a manual doit trigger
