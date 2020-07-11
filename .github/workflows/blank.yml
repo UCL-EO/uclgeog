@@ -48,3 +48,4 @@ jobs:
         NOTEBOOK_USER: "uclgeog"
         BINDER_CACHE: false
         PUBLIC_REGISTRY_CHECK: true
+        GIT_DISCOVERY_ACROSS_FILESYSTEM: true
