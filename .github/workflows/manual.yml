@@ -35,7 +35,7 @@ jobs:
         MYBINDERORG_TAG: ${{ github.event.pull_request.head.ref }}
         NO_PUSH: false
         NO_GIT_PUSH: false
-        IMAGE_NAME: "proflewis/uclgeog_msc"
-        NOTEBOOK_USER: "msc_ucl"
+        IMAGE_NAME: "proflewis/uclgeog"
+        NOTEBOOK_USER: "uclgeog"
         BINDER_CACHE: true
         PUBLIC_REGISTRY_CHECK: true
