@@ -15,12 +15,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "${{ github.event.inputs.name }}"
-        ls -l
-        #pwd
-        #codebase=`grep name meta.yaml|awk -F: '{print $2}'`
-        #echo"codebase is ${codebase}"
+    - run: ls -l
+      shell: bash
+      #pwd
+      #codebase=`grep name meta.yaml|awk -F: '{print $2}'`
+      #echo"codebase is ${codebase}"
 
     - name: checkout files in repo
       uses: actions/checkout@v2
