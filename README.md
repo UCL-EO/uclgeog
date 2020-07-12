@@ -31,7 +31,7 @@ Pull docker image and test
 
 Next, pull the docker image and run a test. In a terminal, type:
 
-	docker run proflewis/uclgeog bash -c "cat meta.yaml| grep version"
+	docker run proflewis/uclgeog:latest bash -c "cat meta.yaml| grep version"
 	
 which should print out the version number. If this is up to date it should show the same version number as in [meta.yaml](meta.yaml).
 
