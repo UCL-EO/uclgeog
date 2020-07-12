@@ -1,10 +1,24 @@
 #!/bin/bash
+
 purge=0
+local=1
+
 local_path="$( dirname "$( which "$0" )" )"
+
+export PATH="${local_path}:${PATH}"
+
 
 for i in "$@"
 do
 case $i in
+  -r|--remote)
+    local=0
+    shift # past argument=value
+    ;;
+  -l|--local)
+    local=1
+    shift # past argument=value
+    ;;
   -p|--purge)
     purge=1
     shift # past argument=value
@@ -14,13 +28,16 @@ case $i in
     shift # past argument=value
     ;;
   --help)
-    echo "${0}: [-pf|--purge|--force]"
+    echo "${0}: [-pf|--purge|--force] [-l|--local] [-r|--remote]"
     echo "-p|--purge : purge any cache of the git file"
     echo "             eg when the git has been updated"
     echo "             and you want to force a re-read"
     echo "-f|--force : purge any cache of the git file"
     echo "             eg when the git has been updated"
     echo "             and you want to force a re-read"
+    echo "-l|--local : use local jupyter-repo2docker call"
+    echo "-r|--remote: use remote jupyter-repo2docker call"
+    echo "             using the machinery of repo2docker-action"
     exit 0
     shift # past argument=value
     ;;
@@ -31,24 +48,57 @@ esac
 done
 ${local_path}/cleanMe
 
-tmpdir=/tmp/fearTheBinder.$$
-
-# need to delete binder
-#mv binder $tmpdir
-
 docker login
 
-# get the id for the git clone command
-echo "first, try a build"
+export GITHUB_REPOSITORY=https://github.com/UCL-EO/uclgeog
+export INPUT_DOCKER_USERNAME=proflewis
+export INPUT_DOCKER_PASSWORD=maqrej-xutqa0-Fywzew
+export INPUT_DOCKER_REGISTRY=
+export GITHUB_ACTOR=${INPUT_DOCKER_USERNAME}
+export INPUT_IMAGE_NAME=proflewis/uclgeog
+export REPO_NAME=uclgeog
+export INPUT_NOTEBOOK_USER=uclgeog
+export GITHUB_SHA=c0d285f7eef547b16b28fece79a866894db08c04
+export SHA_NAME=
+export PUSH_STATUS=uclgeog
+export INPUT_PUBLIC_REGISTRY_CHECK=1
+export INPUT_BINDER_CACHE=1
+export INPUT_LATEST_TAG_OFF=1
+export INPUT_ADDITIONAL_TAG=1
+export INPUT_NO_PUSH=1
+export INPUT_NO_GIT_PUSH=1
+#export INPUT_MYBINDERORG_TAG
 
 if [ $purge -eq 1 ]; then
   echo "purge: $purge"
   docker system prune -fa
 fi
-# --no-run 
-# --push
 
-jupyter-repo2docker --push --no-run --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
+if [ $local -eq 1 ]; then
+  # --no-run 
+  # --push
+  jupyter-repo2docker --push --no-run --user-name ${REPO_NAME} --image-name ${INPUT_IMAGE_NAME} ${GITHUB_REPOSITORY}
+fi
+
+if [ $local -eq 0 ]; then
+
+  # for this, you need repo2docker-action
+  # install in repo home (we provide symbolic links)
+  # one mod to files for path
+  ${local_path}/create_docker_image.sh
+
+
+  if [ "$INPUT_BINDER_CACHE" ]; then
+    python ${local_path}/binder_cache.py "$SHA_NAME"
+    git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    git config --global user.name "github-actions[bot]"
+    git add binder/Dockerfile
+    git commit -m'update registry tagname'
+    if [ ! "$INPUT_NO_GIT_PUSH" ]; then
+        git push -f
+    fi
+  fi
+fi
 
 # move it back again
 #mkdir -p binder
