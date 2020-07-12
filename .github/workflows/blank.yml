@@ -18,11 +18,6 @@ jobs:
     - run: |
         echo "${{ github.event.inputs.name }}"
 
-    - name: checkout files in repo
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-
   # run after system
   system_event:
     needs: system
@@ -37,7 +32,12 @@ jobs:
     needs: system_event
     runs-on: ubuntu-latest
     steps:
-    - name: 'manual action'
+    - name: checkout files in repo
+      if: github.event.inputs.name == 'Update Docker'
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}  
+  - name: 'manual action'
       # docker update only on manual at the momnent
       if: github.event.inputs.name == 'Update Docker'
       uses: machine-learning-apps/repo2docker-action@0.2
