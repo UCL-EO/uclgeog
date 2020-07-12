@@ -1,5 +1,5 @@
-# Welcome to uclgeog: Computing Core
-UCL Geography: Computing core setup for python and jupyter
+# Welcome to uclgeog: Python computing base
+UCL Geography: Computing base setup for python and jupyter
 
 ![](images/ucl_logo.png)
 
@@ -10,7 +10,7 @@ UCL Geography: Computing core setup for python and jupyter
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UCL-EO/uclgeog.git/master)
 
-This repository contains the core settings for software several UCL Geography courses.
+This repository contains the base settings for software several UCL Geography courses.
 
 It is designed to allow users to install the software necessary to partipate in these courses.
 
