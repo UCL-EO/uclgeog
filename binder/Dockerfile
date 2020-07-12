@@ -1,1 +1,0 @@
-FROM proflewis/uclgeog:latest
