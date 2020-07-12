@@ -1,6 +1,6 @@
 package:
   name:    uclgeog
-  version: 1.1.1c
+  version: 1.1.1d
 
 source:
   git_rev: 1.0.0
