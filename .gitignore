@@ -14,7 +14,8 @@ obj
 dist
 .keys.dat
 # fear the binder!
-# binder
+binder
+fearTheBinder
 
 # my stuff
 config.out
