@@ -9,6 +9,10 @@ case $i in
     purge=1
     shift # past argument=value
     ;;
+  -f|--force)
+    purge=1
+    shift # past argument=value
+    ;;
   --help)
     echo "${0}: [-pf|--purge|--force]"
     echo "-p|--purge : purge any cache of the git file"
@@ -27,8 +31,10 @@ esac
 done
 ${local_path}/cleanMe
 
+tmpdir=/tmp/fearTheBinder.$$
+
 # need to delete binder
-mv binder fearTheBinder
+mv binder $tmpdir
 
 docker login
 
@@ -45,7 +51,7 @@ fi
 jupyter-repo2docker --push --no-run --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
 
 # move it back again
-mv fearTheBinder binder
+mv ${tmpdir}/binder .
 
 # redundant
 #docker build --rm -t jupyter/uclgeog  docker 

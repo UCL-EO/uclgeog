@@ -40,7 +40,7 @@ jobs:
         IMAGE_NAME: "proflewis/uclgeog"
         NOTEBOOK_USER: "uclgeog"
         BINDER_CACHE: true
-        PUBLIC_REGISTRY_CHECK: false
+        PUBLIC_REGISTRY_CHECK: true
       env:
         GIT_DISCOVERY_ACROSS_FILESYSTEM: true
         FIRST_NAME: Moto
