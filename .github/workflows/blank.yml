@@ -1,8 +1,5 @@
 name: test
 
-# docker upload moved to dockerhub
-# so dont need this now, really
-# best keep as a backup though 🙈
 on:
   workflow_dispatch:
     inputs:
@@ -50,6 +47,8 @@ jobs:
         IMAGE_NAME: "proflewis/uclgeog"
         NOTEBOOK_USER: "uclgeog"
         PUBLIC_REGISTRY_CHECK: true
+        MYBINDERORG_TAG: "latest"
+        BINDER_CACHE: false
       env:
         GIT_DISCOVERY_ACROSS_FILESYSTEM: true
         FIRST_NAME: Moto
