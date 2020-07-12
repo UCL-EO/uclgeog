@@ -32,8 +32,7 @@ case $i in
 esac
 done
 
-
-grep $old .???* * */* | grep -v Binary | grep -v build | grep -v egg-info > /tmp/x.$$
+find  . -exec grep -nw ${old} {} + 2>&1 | grep -v 'Is a directory' | grep -v Binary | grep -v build | grep -v egg-info > /tmp/x.$$
 export xdir=/tmp/xdir.$$
 export xfile=/tmp/xdir.$$/xfiles
 
