@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# a wrapper around find
+# in case youforget the args
+find  . -exec grep -nw ${1} {} + 2>&1 | grep -v 'Is a directory'

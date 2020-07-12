@@ -34,8 +34,9 @@ if [ $purge -eq 1 ]; then
   docker system prune -fa
 fi
 # --no-run 
+# --push
 
-jupyter-repo2docker --no-run --push --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
+jupyter-repo2docker --no-run --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
 
 # redundant
 #docker build --rm -t jupyter/uclgeog  docker 
