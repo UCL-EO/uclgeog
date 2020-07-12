@@ -48,7 +48,6 @@ jobs:
         NOTEBOOK_USER: "uclgeog"
         PUBLIC_REGISTRY_CHECK: true
         MYBINDERORG_TAG: "latest"
-        BINDER_CACHE: false
       env:
         GIT_DISCOVERY_ACROSS_FILESYSTEM: true
         FIRST_NAME: Moto
