@@ -1,5 +1,8 @@
 name: test
 
+# docker upload moved to dockerhub
+# so dont need this now, really
+# best keep as a backup though 🙈
 on:
   workflow_dispatch:
     inputs:
