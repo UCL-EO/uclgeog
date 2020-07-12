@@ -1,0 +1,14 @@
+name: uclgeog-test
+
+on: 
+  push
+
+jobs:
+  test-1:
+    runs-on: ubuntu-latest
+
+    steps:
+   
+    # test that we can import the library 
+    - name import-uclgeog:
+      run: python -c "import uclgeog"
