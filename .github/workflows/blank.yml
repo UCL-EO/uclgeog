@@ -19,20 +19,14 @@ jobs:
         echo "${{ github.event.inputs.name }}"
 
   # run after system
-  system_event:
+  docker:
     needs: system
     runs-on: ubuntu-latest
     steps:
     - name: 'not manual action'
       if: github.event.inputs.name != 'Update Docker'
       run: echo "Hello ${{ github.event.inputs.name }}"
-
-  # run after system_event
-  docker:
-    needs: system_event
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout files in repo
+   - name: checkout files in repo
       if: github.event.inputs.name == 'Update Docker'
       uses: actions/checkout@v2
       with:
