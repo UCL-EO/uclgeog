@@ -1,0 +1,6 @@
+#!/bin/bash
+export egg="clean me, clean me, mean machine me"
+# put this in as an easter egg 
+#echo $egg
+
+rm -rf *egg* build dist

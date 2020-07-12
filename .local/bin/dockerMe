@@ -1,5 +1,6 @@
 #!/bin/bash
 purge=0
+local_path="$( dirname "$( which "$0" )" )"
 
 for i in "$@"
 do
@@ -21,6 +22,7 @@ case $i in
     ;;
 esac
 done
+${local_path}/cleanMe
 
 # need to delete binder
 rm -f binder/*
@@ -36,7 +38,7 @@ fi
 # --no-run 
 # --push
 
-jupyter-repo2docker --no-run --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
+jupyter-repo2docker --push --no-run --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
 
 # redundant
 #docker build --rm -t jupyter/uclgeog  docker 
