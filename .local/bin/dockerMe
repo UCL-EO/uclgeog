@@ -10,8 +10,11 @@ case $i in
     shift # past argument=value
     ;;
   --help)
-    echo "${0}: [-p|--purge]"
+    echo "${0}: [-pf|--purge|--force]"
     echo "-p|--purge : purge any cache of the git file"
+    echo "             eg when the git has been updated"
+    echo "             and you want to force a re-read"
+    echo "-f|--force : purge any cache of the git file"
     echo "             eg when the git has been updated"
     echo "             and you want to force a re-read"
     exit 0
