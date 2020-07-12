@@ -51,6 +51,7 @@ fi
 jupyter-repo2docker --push --no-run --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
 
 # move it back again
+mkdir -p binder
 mv ${tmpdir}/binder .
 
 # redundant
