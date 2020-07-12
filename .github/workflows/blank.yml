@@ -18,20 +18,28 @@ jobs:
     - run: |
         echo "${{ github.event.inputs.name }}"
 
-  # run after system
-  docker:
+  repo:
     needs: system
     runs-on: ubuntu-latest
     steps:
     - name: 'not manual action'
       if: github.event.inputs.name != 'Update Docker'
-      run: echo "Hello ${{ github.event.inputs.name }}"
+      run: echo "Do a manual trigger set to 'Update Docker'"
     - name: checkout files in repo
       if: github.event.inputs.name == 'Update Docker'
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.event.pull_request.head.sha }}  
-    - name: 'manual action'
+        ref: ${{ github.event.pull_request.head.sha }}
+
+  # run after repo to avoid race
+  docker:
+    needs: repo
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'not manual action'
+      if: github.event.inputs.name != 'Update Docker'
+      run: echo "Do a manual trigger set to 'Update Docker'"
+    - name: 'Make docker'
       # docker update only on manual at the momnent
       if: github.event.inputs.name == 'Update Docker'
       uses: machine-learning-apps/repo2docker-action@0.2
