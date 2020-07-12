@@ -45,6 +45,14 @@ This should download the docker image (if it isnt already downloaded) and print 
 
 Open a browser with that address, then navigate to the notebook you want to use.
 
+If you want to play about on the docker machine:
+
+	docker run -it proflewis/uclgeog bash
+
+will open a `bash` shell for you. If you need to be root on the machine for some reason:
+
+	docker run -u 0 -it proflewis/uclgeog bash
+
 Conda package
 -----------------
 
