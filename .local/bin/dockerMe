@@ -25,7 +25,7 @@ done
 ${local_path}/cleanMe
 
 # need to delete binder
-rm -f binder/*
+#rm -f binder/*
 docker login
 
 # get the id for the git clone command
