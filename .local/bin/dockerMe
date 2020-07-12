@@ -34,7 +34,7 @@ ${local_path}/cleanMe
 tmpdir=/tmp/fearTheBinder.$$
 
 # need to delete binder
-mv binder $tmpdir
+#mv binder $tmpdir
 
 docker login
 
@@ -51,8 +51,8 @@ fi
 jupyter-repo2docker --push --no-run --user-name uclgeog --image-name proflewis/uclgeog  https://github.com/UCL-EO/uclgeog 
 
 # move it back again
-mkdir -p binder
-mv ${tmpdir}/binder .
+#mkdir -p binder
+#mv ${tmpdir}/binder .
 
 # redundant
 #docker build --rm -t jupyter/uclgeog  docker 
