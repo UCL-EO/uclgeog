@@ -94,12 +94,13 @@ install:
   # Replace dep1 dep2 ... with your dependencies
   # python=$TRAVIS_PYTHON_VERSION
   - conda env create -n uclgeog --file environment.yml
-  - conda activate uclgeog
-  - conda config --add channels proflewis
- 
+  - conda activate uclgeog 
+  #- conda config --add channels proflewis
   # make the uclgeog codebase
   - python setup.py install
   - /bin/bash ./postBuild 
+  # sort some edits to the notebook
+  - python uclgeog/sort_notebook.py
   - pwd
   - ls
   - cat ${HOME}/.jupyter/jupyter_notebook_config.json
