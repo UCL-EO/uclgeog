@@ -100,6 +100,9 @@ install:
   # make the uclgeog codebase
   - python setup.py install
   - /bin/bash ./postBuild 
+  # now put some fixes in ${HOME}/.jupyter/jupyter_notebook_config.json
+  # the fix configs are stored in
+  - python uclgeog/_sort_notebook.py
   - pwd
   - ls
   - cat ${HOME}/.jupyter/jupyter_notebook_config.json
