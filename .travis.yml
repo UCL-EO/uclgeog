@@ -45,4 +45,4 @@ install:
 # command to run tests
 script:
   # this is in test.yml too ... resolve
-  - python -c "import geogucl"
+  - python -c "import uclgeog"
