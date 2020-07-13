@@ -1,10 +1,30 @@
 language: python
+
+os:
+  - linux
+  # for packages on https://repo.anaconda.com/miniconda/
+  env: MINI_OS="Linux"
+       MINI_ARCH="x86_64"
+  - osx
+  # for packages on https://repo.anaconda.com/miniconda/
+  env: MINI_OS="MacOSX"
+       MINI_ARCH="x86_64"
+  
+# not critical of os x fails
+# mainly support linux
+jobs:
+  allow_failures:
+    - os: osx
+
 python:
   - "3.7"
-
+  # for packages on https://repo.anaconda.com/miniconda/
+  env: MINI="Miniconda3"
+  
 #  - "3.6"      # current default Python on Travis CI
 #
 #   - "2.7"
+#   env: MINI=Miniconda2
 #  - "3.4"
 #  - "3.5"
 #   - "2.7"
@@ -12,21 +32,28 @@ python:
 # - "3.5"
 # command to install dependencies
 # conda from https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
-install:
-  - sudo apt update
-  # the apt we use for docker
-  - cat apt.txt | xargs sudo apt-get install
-  
-  # We do this conditionally because it saves us some downloading if the
-  # version is the same.
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+
+# brew
+before_install:
+  # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  # https://brew.sh/
+  # assume brew is already installed
+  - if [ "$TRAVIS_OS_NAME" = "osx" ];   then 
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
+      brew update  
+      
+    fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+      sudo apt update ; 
     fi
   
-  # anaconda
-  - bash miniconda.sh -b -p $HOME/miniconda
+install:
+  # system requirements defined in apt.txt b ut also works for brew
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat apt.txt | xargs sudo apt-get install; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ] ;  then cat apt.txt | xargs brew install; fi
+  
+  # download miniconda into $HOME/miniconda
+  - bash "$(curl -fsSL https://repo.continuum.io/miniconda/${MINI}-latest-${MINI_OS}-${MINI_ARCH}.sh)" -b -p $HOME/miniconda
   - source "$HOME/miniconda/etc/profile.d/conda.sh"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
@@ -40,6 +67,8 @@ install:
   - conda create -q -n geogucl-test python=$TRAVIS_PYTHON_VERSION
   - conda config --add channels proflewis
   - conda activate geogucl-test
+  
+  # make the uclgeog codebase
   - python setup.py install
   - /bin/bash ./postBuild 
 # command to run tests
