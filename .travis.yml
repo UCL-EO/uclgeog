@@ -64,16 +64,12 @@ install:
   # set up: uses information from meta.yaml
   - python setup.py install 
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -n geogucl python=$TRAVIS_PYTHON_VERSION --file environment.yml
-  - conda activate geogucl
+  - conda create -n uclgeog python=$TRAVIS_PYTHON_VERSION --file environment.yml
+  - conda activate uclgeog
   - conda config --add channels proflewis
  
   # make the uclgeog codebase
   - python setup.py install
-  # Issue:
-  # Without the sudo, I get:
-  # Enabling notebook extension rubberband/main...
-  #    - Validating: problems found:
   - /bin/bash ./postBuild 
 # command to run tests
 script:
