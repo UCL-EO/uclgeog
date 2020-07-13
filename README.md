@@ -3,7 +3,7 @@ UCL Geography: Computing base setup for python and jupyter
 
 ![](images/ucl_logo.png)
 
-![test](https://github.com/UCL-EO/uclgeog/workflows/test/badge.svg)
+[![Build Status](https://travis-ci.org/UCL-EO/uclgeog.svg?branch=master)](https://travis-ci.org/UCL-EO/uclgeog)
 
 [![docker pulls](https://img.shields.io/docker/pulls/proflewis/uclgeog.svg)](https://hub.docker.com/proflewis/uclgeog) [![docker stars](https://img.shields.io/docker/stars/proflewis/uclgeog.svg)](https://hub.docker.com/r/proflewis/uclgeog) 
 [![metadata](https://images.microbadger.com/badges/image/proflewis/uclgeog.svg)](https://microbadger.com/images/proflewis/uclgeog "proflewis/uclgeog image metadata")
