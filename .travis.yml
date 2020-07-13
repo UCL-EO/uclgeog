@@ -1,11 +1,12 @@
 language: python
 
-#os:
-#  - linux
+os:
+  - linux
+    env: MINI_OS="Linux"
+         MINI_ARCH="x86_64"
+         MINI="Miniconda3"
 #  # for packages on https://repo.anaconda.com/miniconda/
-env: MINI_OS="Linux"
-     MINI_ARCH="x86_64"
-     MINI="Miniconda3"
+
 #  - osx
 #  # for packages on https://repo.anaconda.com/miniconda/
 #  env: MINI_OS="MacOSX"
