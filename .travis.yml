@@ -41,7 +41,7 @@ install:
   - conda config --add channels proflewis
   - conda activate geogucl-test
   - python setup.py install
-  - postBuild 
+  - /bin/bash ./postBuild 
 # command to run tests
 script:
   # this is in test.yml too ... resolve
