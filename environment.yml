@@ -62,6 +62,7 @@ dependencies:
   - ipykernel
   - importlib_metadata
   - nbgrader
+  - pprint
   - pip
   - pip:
     - jupyter_http_over_ws
