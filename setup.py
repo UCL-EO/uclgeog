@@ -21,84 +21,9 @@ setup_info = {
 }
 
 # get version & name from meta
-# eg 
-'''
-package:
-  name:    uclgeog
-  version: 1.0.11
-
-source:
-  git_rev: 1.0.0
-  git_url: https://github.com/UCL-EO/uclgeog
-
-build:
-  noarch: python
-  number: 0
-  script: python -m pip install --no-deps --ignore-installed .
-
-
-requirements:
-  build:
-    - python>=3.7
-    - setuptools
-
-  run:
-    - python
-
-test:
-  imports:
-    - uclgeog
-
-about:
-  home: https://github.com/UCL-EO/uclgeog
 '''
 
-# try reading from META
-try:
-  with open(setup_info['meta'],'r') as f:
-    # read the last line
-    lines = [i.strip() for i in f.readlines()] 
-
-  # package info
-  # keep this low level for robustness
-  package = [i == 'package:' for i in lines]
-  end_package = [i == '' for i in lines]
-  version = ['version:' in i for i in lines]
-  version_no = [''.join(i.split('version:')[1:]).strip() for i in lines]
-  name =  [''.join(i.split('name:')[1:]).strip() for i in lines]
-  info = list(zip(package,version,end_package,version_no,name))
-  for i,t in enumerate(info):
-    package,version,end_package,version_no,name = t
-    # package, so start parsing following lines
-    if package:
-      for j in range(i,len(info)):
-        package,version,end_package,version_no,name = info[j]
-        if version:
-          setup_info['version'] = version_no
-        if len(name):
-          setup_info['name'] = name
-        if end_package:
-          break
-
-  # source info
-  package = [i == 'source:' for i in lines]
-  end_package = [i == '' for i in lines]
-  version = [''.join(i.split('version:')[1:]).strip() for i in lines]
-  info = list(zip(package,version,end_package))
-  for i,t in enumerate(info):
-    package,version,end_package = t
-    if package:
-      for j in range(i,len(info)):
-        package,version,end_package = info[j]
-        if len(version):
-          setup_info['url'] = version
-        if end_package:
-          break
-
-  # test
-
-except:
-  del setup_info['meta']
+from uclgeog/setenv.py import *
 
 try:
   import pprint
