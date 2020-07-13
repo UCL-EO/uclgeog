@@ -2,7 +2,6 @@ class SetenvUtil():
   import yaml
   import json
   import os
-  import pprint
   def __init__(self,setup=None,ignore=['readme','json'],pre_env='SETUP_'):
     '''
     Read metadata from a yml
@@ -65,7 +64,6 @@ class SetenvUtil():
         print(f'export {self.pre_env}{i}={n_i}');
         
   def info(self):
-    print = pprint.PrettyPrinter(indent=4).pprint
     print('-'*40)
     print(self.setup)
     print('-'*40)
