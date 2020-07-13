@@ -81,3 +81,4 @@ For reference:
 * the codebase is stored on [anaconda.org](https://anaconda.org/profLewis/uclgeog).
 * the git is stored on [github.com](https://github.com/UCL-EO/uclgeog).
 * the binder is stored on [mybinder.org](https://mybinder.org/v2/gh/UCL-EO/uclgeog.git/master)
+* the travis runs on [travis-ci.org](https://travis-ci.org/github/UCL-EO/uclgeog/)
