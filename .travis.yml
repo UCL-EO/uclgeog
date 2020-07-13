@@ -92,7 +92,7 @@ install:
   - conda install -c anaconda yaml pip 
   - conda install -c auto prettyprint
   # environment -- I wonder if this works
-  - `from setenv_util import SetenvUtil;env_info = SetenvUtil(ignore=['readme','json']);env_info.dump_env()`
+  #- `from setenv_util import SetenvUtil;env_info = SetenvUtil(ignore=['readme','json']);env_info.dump_env()`
   # set up: uses information from meta.yaml
   - python setup.py install 
   # Replace dep1 dep2 ... with your dependencies
