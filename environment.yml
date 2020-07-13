@@ -5,7 +5,7 @@ channels:
   - anaconda
 dependencies:
   - conda
-  - python=3.7
+  - python
   - anaconda-client
   - conda-build
   - nb_conda_kernels
