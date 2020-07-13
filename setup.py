@@ -25,6 +25,9 @@ setup(
       name=os.environ['SETUP_NAME']
       description=os.environ['SETUP_DESCRIPTION']
       author=os.environ['SETUP_AUTHOR']
+      author_email=os.environ['SETUP_AUTHOR_EMAIL']
+      license=os.environ['SETUP_LICENSE']
+      keywords=os.environ['SETUP_KEYWORDS']
     except:
       # defaults
       url='https://github.com/profLewis/uclgeog'
@@ -32,20 +35,24 @@ setup(
       name='uclgeog'
       description='UCL MSc notes'
       author='Prof. P. Lewis'
-      author_email='p.lewis@ucl.ac.uk',
+      author_email='p.lewis@ucl.ac.uk'
+      license='MIT'
+      keywords='scientific computing',
+
   
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
   
     # Get the long description from the relevant file
-    with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    try:
+      with open(path.join(here, 'README.md'), encoding='utf-8') as f:
         long_description = ''
-  
-    # Choose your license
-    license='MIT',
-
+    except:
+      long_description = ''
+    
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    pyver='Python '+".".join([str(sys.version_info.major),str(sys.version_info.minor),str(sys.version_info.micro)])
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -58,15 +65,14 @@ setup(
         'Topic :: Software Development :: Build Tools',
 
         # Pick your license as you wish (should match "license" above)
-        'License :: OSI Approved :: MIT License',
+        f'License :: OSI Approved :: {license} License',
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 3.7',
+        f'Programming Language :: Python :: {pyver}',
     ],
 
     # What does your project relate to?
-    keywords='scientific computing',
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
