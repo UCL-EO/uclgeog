@@ -30,7 +30,7 @@ jobs:
 
 os: 
   - "linux"
-  - "osx
+  - "osx"
 # - windows
 # - osx
 
