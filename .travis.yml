@@ -52,7 +52,7 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ;  then cat apt.txt | xargs brew install; fi
   
   # download miniconda into $HOME/miniconda
-  - wget https://repo.continuum.io/miniconda/${MINI)-latest-${MINI_OS}-${MINI_ARCH}.sh -O miniconda.sh;
+  - wget https://repo.continuum.io/miniconda/${MINI}-latest-${MINI_OS}-${MINI_ARCH}.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
   - source "$HOME/miniconda/etc/profile.d/conda.sh"
   - hash -r
