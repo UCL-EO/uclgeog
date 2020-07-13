@@ -50,19 +50,22 @@ try:
 except:
     pass
 
+  
+# Get the long description from the relevant file
+try:
+  with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = ''
+except:
+  long_description = ''
+    
+pyver='Python '+".".join([str(sys.version_info.major),str(sys.version_info.minor),str(sys.version_info.micro)])
+print(pyver)
+
 setup(  
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-  
-    # Get the long description from the relevant file
-    try:
-      with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-        long_description = ''
-    except:
-      long_description = ''
-    
-    pyver='Python '+".".join([str(sys.version_info.major),str(sys.version_info.minor),str(sys.version_info.micro)])
+
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
