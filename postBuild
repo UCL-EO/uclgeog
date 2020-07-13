@@ -1,5 +1,7 @@
 #!/bin/bash
-pip install nbgrader
+
+# shouldnt need this, but need to test and confirm
+#pip install nbgrader
 
 #conda upgrade -c proflewis uclgeog --yes 
 conda upgrade -c conda-forge jupyter_contrib_nbextensions --yes 
@@ -8,7 +10,9 @@ conda upgrade -c conda-forge jupyter_contrib_nbextensions --yes
 # for google colab 
 jupyter serverextension enable --py jupyter_http_over_ws
 
-jupyter contrib nbextension install --user
+#jupyter contrib nbextension install --user
+# try withiout --user
+jupyter contrib nbextension install
 jupyter nbextension enable --py widgetsnbextension
 jupyter nbextension enable rubberband/main
 jupyter nbextension enable exercise2/main
