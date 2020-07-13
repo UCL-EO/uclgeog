@@ -1,10 +1,10 @@
 language: python
 
-#os:
-#  - linux
-env: MINI_OS="Linux"
-     MINI_ARCH="x86_64"
-     MINI="Miniconda3"
+
+env: USER="uclgeog"
+     LANG="en_US.UTF-8"
+     LC_ALL="en_US.UTF-8"
+
 #  # for packages on https://repo.anaconda.com/miniconda/
 
 #  - osx
@@ -20,7 +20,8 @@ env: MINI_OS="Linux"
 
 os: 
   - "linux"
-
+# - windows
+# - osx
 python:
   - "3.7"
   # for packages on https://repo.anaconda.com/miniconda/
@@ -33,36 +34,51 @@ python:
 #   - "2.7"
 #  - "3.4"
 # - "3.5"
-# command to install dependencies
 # conda from https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
 
 
 jobs:
   allow_failures:
-    - os: "osx"
+    - os: 
+      - "osx"
+      - "windows"
     - python: 
       - "3.4"
       - "3.5"
       - "3.6"
 
-# brew
 before_install:
-  # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  # https://brew.sh/
-  # assume brew is already installed
+  # no support for python 2 here
+  export MINI="Miniconda3"
+  export MINI_ARCH="x86_64";
   - if [ "$TRAVIS_OS_NAME" = "osx" ];   then 
+      export MINI_OS="MacOSX"; 
+      # get brew for mac, for unix-y packages
+      # https://brew.sh/
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
       brew update; 
     fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+      export MINI_OS="Linux";
+      # use apt-get for unix packages
       sudo apt update; 
     fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 
+      export MINI_OS="Windows";
+      # use ??? for unix packages
+      #
+    fi   
   
 install:
   # system requirements defined in apt.txt b ut also works for brew
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat apt.txt | xargs sudo apt-get install; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ;  then cat apt.txt | xargs brew install; fi
-  
+  - if [ "$TRAVIS_OS_NAME" = "windows" ] ;  then
+      # not critical, probably
+      echo "You will be missing some unix-y packages we might like"
+      cat apt.txt 
+    fi
+    
   # download miniconda into $HOME/miniconda
   - wget https://repo.continuum.io/miniconda/${MINI}-latest-${MINI_OS}-${MINI_ARCH}.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
