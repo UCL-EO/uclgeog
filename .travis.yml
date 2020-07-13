@@ -20,6 +20,7 @@ env: MINI_OS="Linux"
 
 os: 
   - "linux"
+  - "osx"
 
 python:
   - "3.7"
