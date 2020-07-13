@@ -54,16 +54,14 @@ before_install:
   # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   # https://brew.sh/
   # assume brew is already installed
-  - if [ "$TRAVIS_OS_NAME" == "osx" ];   then  
+  - if [ "$TRAVIS_OS_NAME" = "osx" ];   then  
       export MINI_OS="MacOSX";
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
       brew update; 
-    fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then 
+    elif [ "$TRAVIS_OS_NAME" = "linux" ]; then 
       export MINI_OS="Linux";
       sudo apt update; 
-    fi
-  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then 
+    elif [ "$TRAVIS_OS_NAME" = "windows" ]; then 
       export MINI_OS="Windows";
       #sudo apt update; 
     fi
