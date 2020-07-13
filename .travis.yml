@@ -51,9 +51,6 @@ python:
 
 # brew
 before_install:
-  # need these for scripts before full setup
-  - pip install jsonlib
-  - pip install yaml
   # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   # https://brew.sh/
   # assume brew is already installed
@@ -91,7 +88,8 @@ install:
   - conda update -q conda
   # Useful for debugging any issues with conda
   - conda info -a
-
+  # need these before setup.py to pull environment info
+  - conda install pip yaml
   # set up: uses information from meta.yaml
   - python setup.py install 
   # Replace dep1 dep2 ... with your dependencies
