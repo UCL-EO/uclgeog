@@ -47,20 +47,13 @@ python:
 # command to install dependencies
 # conda from https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
 
-jobs:
-  allow_failures:
-    - os: "osx"
-    - python: 
-      - "3.4"
-      - "3.5"
-      - "3.6"
-
 # brew
 before_install:
   # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   # https://brew.sh/
   # assume brew is already installed
   - if [ "$TRAVIS_OS_NAME" = "osx" ];   then 
+      export MINI_OS="MacOSX";
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
       brew update; 
     fi
