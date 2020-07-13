@@ -1,7 +1,6 @@
 """setuptools for uclgeog Scientific Computing, UCL 
 
 https://github.com/profLewis/uclgeog
-"""
 
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
@@ -21,34 +20,37 @@ setup_info = {
 }
 
 # get version & name from meta
-'''
+"""
 
-from uclgeog/setenv.py import *
 
-try:
-  import pprint
-  print = pprint.PrettyPrinter(indent=4).pprint
-  # test pretty printer
-  print('I feel pretty, oh so pretty')
-except:
-  pass
-  
-print('-'*40)
-print(setup_info)
-print('-'*40)
-# store this in VERSION file
-try:
-  import json
-  with open('setup_info.json', 'w') as fp:
-    json.dump(setup_info, fp)
-except:
-  pass
+
+from setenv_util import SetenvUtil
+
+
 
 here = path.abspath(path.dirname(__file__))
+
+# defaults: over-written by info in meta.yaml
+# or setup_info['meta']
+setup_info = {
+   'url'     : 'https://github.com/profLewis/uclgeog',
+   'version' : '1.0.0',
+   'meta'    : 'meta.yaml', 
+   'name'    : 'uclgeog',
+   'json'    : 'setup_info.json'
+}
+env_info = SetenvUtil(setup=setup_info,ignore=['readme','json'])
+# dump to json
+env_info.dump_json()
+# update 
+setup_info.update(env_info.dump_dict())
+# lkets see the envs
+env_info.dump_env()
 
 # Get the long description from the relevant file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = ''
+
 
 setup(
     name=setup_info['name'],
