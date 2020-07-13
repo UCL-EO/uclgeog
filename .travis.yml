@@ -1,9 +1,25 @@
 language: python
 
+#os:
+#  - linux
+env: MINI_OS="Linux"
+     MINI_ARCH="x86_64"
+     MINI="Miniconda3"
+#  # for packages on https://repo.anaconda.com/miniconda/
+
+#  - osx
+#  # for packages on https://repo.anaconda.com/miniconda/
+#  env: MINI_OS="MacOSX"
+#       MINI_ARCH="x86_64"
+  
+# not critical of os x fails
+# mainly support linux
+#jobs:
+#  allow_failures:
+#    - os: osx
+
 os: 
   - "linux"
-# - windows
-# - osx
 
 python:
   - "3.7"
@@ -17,23 +33,35 @@ python:
 #   - "2.7"
 #  - "3.4"
 # - "3.5"
+# command to install dependencies
 # conda from https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
 
-env: MINI="Miniconda3";
-  MINI_ARCH="x86_64";
-  MINI_OS="Linux";
-  
+jobs:
+  allow_failures:
+    - os: "osx"
+    - python: 
+      - "3.4"
+      - "3.5"
+      - "3.6"
+
+# brew
 before_install:
-  # no support for python 2 here
+  # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  # https://brew.sh/
+  # assume brew is already installed
+  - if [ "$TRAVIS_OS_NAME" = "osx" ];   then 
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
+      brew update; 
+    fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
-      # use apt-get for unix packages
       sudo apt update; 
     fi
-
+  
 install:
   # system requirements defined in apt.txt b ut also works for brew
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat apt.txt | xargs sudo apt-get install; fi
-    
+  - if [ "$TRAVIS_OS_NAME" = "osx" ] ;  then cat apt.txt | xargs brew install; fi
+  
   # download miniconda into $HOME/miniconda
   - wget https://repo.continuum.io/miniconda/${MINI}-latest-${MINI_OS}-${MINI_ARCH}.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
@@ -55,9 +83,6 @@ install:
   # make the uclgeog codebase
   - python setup.py install
   - /bin/bash ./postBuild 
-  # now put some fixes in ${HOME}/.jupyter/jupyter_notebook_config.json
-  # the fix configs are stored in
-  - python uclgeog/_sort_notebook.py
   - pwd
   - ls
   - cat ${HOME}/.jupyter/jupyter_notebook_config.json
