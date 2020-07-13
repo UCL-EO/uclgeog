@@ -70,7 +70,11 @@ install:
   
   # make the uclgeog codebase
   - python setup.py install
-  - /bin/bash ./postBuild 
+  # Issue:
+  # Without the sudo, I get:
+  # Enabling notebook extension rubberband/main...
+  #    - Validating: problems found:
+  - sudo /bin/bash ./postBuild 
 # command to run tests
 script:
   # this is in test.yml too ... resolve
