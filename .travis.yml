@@ -63,10 +63,7 @@ before_install:
       export MINI_OS="Linux";
       sudo apt update; 
     fi
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then
-      export MINI_OS="Windows";
-      # use ??? for unix packages
-    fi  
+
 install:
   # system requirements defined in apt.txt b ut also works for brew
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat apt.txt | xargs sudo apt-get install; fi
