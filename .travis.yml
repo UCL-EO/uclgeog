@@ -63,6 +63,10 @@ before_install:
       export MINI_OS="Linux";
       sudo apt update; 
     fi
+  - if [ "$TRAVIS_OS_NAME" = "blaa" ]; then 
+      export MINI_OS="Linux";
+      sudo apt update; 
+    fi
 #    elif [ "$TRAVIS_OS_NAME" = "windows" ]; then 
 #      export MINI_OS="Windows";
 #      #sudo apt update; 
