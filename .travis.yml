@@ -91,7 +91,7 @@ install:
   # need these before setup.py to pull environment info
   - conda install -c anaconda yaml pip 
   # environment variables
-  - python -c "from setenv_util import SetenvUtil;env_info = SetenvUtil();env_info.dump_env()" > /tmp/env.sh
+  - python -c "import yaml,pip;from setenv_util import SetenvUtil;env_info = SetenvUtil();env_info.dump_env()" > /tmp/env.sh
   - source /tmp/env.sh
   - cat /tmp/env.sh
   - rm -f /tmp/env.sh
