@@ -73,6 +73,8 @@ install:
   # make the uclgeog codebase
   - python setup.py install
   - /bin/bash ./postBuild 
+  - pwd
+  - cat ${HOME}/.jupyter/jupyter_notebook_config.json
 # command to run tests
 script:
   # this is in test.yml too ... resolve
