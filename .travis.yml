@@ -20,11 +20,6 @@ env: MINI_OS="Linux"
 
 os: "linux"
 
-jobs:
-  allow_failures:
-    - os: "osx"
-
-
 python:
   - "3.7"
   # for packages on https://repo.anaconda.com/miniconda/
@@ -39,6 +34,15 @@ python:
 # - "3.5"
 # command to install dependencies
 # conda from https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
+
+
+jobs:
+  allow_failures:
+    - os: "osx"
+    - python: 
+      - "3.4"
+      - "3.5"
+      - "3.6"
 
 # brew
 before_install:
