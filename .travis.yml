@@ -20,9 +20,6 @@ env: MINI_OS="Linux"
 
 os: 
   - "linux"
-    env: MINI_OS="Linux"
-         MINI_ARCH="x86_64"
-         MINI="Miniconda3"
 
 python:
   - "3.7"
@@ -88,6 +85,7 @@ install:
   - python setup.py install
   - /bin/bash ./postBuild 
   - pwd
+  - ls
   - cat ${HOME}/.jupyter/jupyter_notebook_config.json
 # command to run tests
 script:
