@@ -20,7 +20,9 @@ env: MINI_OS="Linux"
 
 os: 
   - "linux"
-  - "osx"
+    env: MINI_OS="Linux"
+         MINI_ARCH="x86_64"
+         MINI="Miniconda3"
 
 python:
   - "3.7"
