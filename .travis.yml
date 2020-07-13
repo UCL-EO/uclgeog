@@ -51,6 +51,9 @@ python:
 
 # brew
 before_install:
+  # need these for scripts before full setup
+  pip install json
+  pip install yaml
   # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   # https://brew.sh/
   # assume brew is already installed
