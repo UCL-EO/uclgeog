@@ -7,39 +7,50 @@ over-ride with env variables
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
 # To use a consistent encoding
+
+"""
 from codecs import open
 from os import path
-"""
-
 import os
 
 here = path.abspath(path.dirname(__file__))
 
+# defaults in here
+url='https://github.com/profLewis/uclgeog'
+version='1.0.0'
+name='uclgeog'
+description='UCL Geography MSc notes'
+author='Prof. P. Lewis'
+author_email='p.lewis@ucl.ac.uk'
+license='MIT'
+keywords='scientific computing'
 
+# see if all required environment variables are set
+# could do this neater for over-ride
+try:
+    # read env from env.sh
+    with open('env.sh','r') as f:
+        lines = f.readlines()
+    # simple form read of the env file
+    # assumes # at 1st character of comment line
+    # and that format is
+    # export x=y
+    for i in ((l.split()[1].split('=')) for l in lines if(l[0] != '#')):
+        os.environ[i[0]] = i[1]
 
-setup(
-    try:
-      # The project's main homepage.
-      url=os.environ['SETUP_URL']
-      version=os.environ['SETUP_VERSION']
-      name=os.environ['SETUP_NAME']
-      description=os.environ['SETUP_DESCRIPTION']
-      author=os.environ['SETUP_AUTHOR']
-      author_email=os.environ['SETUP_AUTHOR_EMAIL']
-      license=os.environ['SETUP_LICENSE']
-      keywords=os.environ['SETUP_KEYWORDS']
-    except:
-      # defaults
-      url='https://github.com/profLewis/uclgeog'
-      version='1.0.0'
-      name='uclgeog'
-      description='UCL MSc notes'
-      author='Prof. P. Lewis'
-      author_email='p.lewis@ucl.ac.uk'
-      license='MIT'
-      keywords='scientific computing',
+    # The project's main homepage.
+    url=os.environ['SETUP_URL']
+    version=os.environ['SETUP_VERSION']
+    name=os.environ['SETUP_NAME']
+    description=os.environ['SETUP_DESCRIPTION']
+    author=os.environ['SETUP_AUTHOR']
+    author_email=os.environ['SETUP_AUTHOR_EMAIL']
+    license=os.environ['SETUP_LICENSE']
+    keywords=os.environ['SETUP_KEYWORDS']
+except:
+    pass
 
-  
+setup(  
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
@@ -51,8 +62,9 @@ setup(
     except:
       long_description = ''
     
-    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     pyver='Python '+".".join([str(sys.version_info.major),str(sys.version_info.minor),str(sys.version_info.micro)])
+
+    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         # How mature is this project? Common values are
         #   3 - Alpha
