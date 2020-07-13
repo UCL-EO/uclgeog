@@ -36,6 +36,7 @@ os:
 
 python:
   - "3.7"
+  - "3.8"
   # for packages on https://repo.anaconda.com/miniconda/
 #  - "3.6"      # current default Python on Travis CI
 #
