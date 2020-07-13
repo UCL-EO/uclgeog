@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # shouldnt need this, but need to test and confirm
+# these are hacks, now commented out
 #pip install nbgrader
-
 #conda upgrade -c proflewis uclgeog --yes 
-conda upgrade -c conda-forge jupyter_contrib_nbextensions --yes 
+#conda upgrade -c anaconda jupyter --yes 
+#conda upgrade -c conda-forge jupyter_contrib_nbextensions --yes 
 #conda upgrade -c conda-forge jupyter_contrib_nbextensions --yes 
 
 # for google colab 
