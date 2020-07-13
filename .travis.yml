@@ -64,10 +64,10 @@ install:
   # set up: uses information from meta.yaml
   - python setup.py install 
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -q -n geogucl-test python=$TRAVIS_PYTHON_VERSION --file environment.yml
+  - conda create -n geogucl python=$TRAVIS_PYTHON_VERSION --file environment.yml
+  - conda activate geogucl
   - conda config --add channels proflewis
-  - conda activate geogucl-test
-  
+ 
   # make the uclgeog codebase
   - python setup.py install
   # Issue:
