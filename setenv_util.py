@@ -1,7 +1,9 @@
+import yaml
+import json
+import os
+  
 class SetenvUtil():
-  import yaml
-  import json
-  import os
+
   def __init__(self,setup=None,ignore=['readme','json'],pre_env='SETUP_'):
     '''
     Read metadata from a yml
