@@ -5,10 +5,10 @@ os:
   # for packages on https://repo.anaconda.com/miniconda/
   env: MINI_OS="Linux"
        MINI_ARCH="x86_64"
-  - osx
-  # for packages on https://repo.anaconda.com/miniconda/
-  env: MINI_OS="MacOSX"
-       MINI_ARCH="x86_64"
+#  - osx
+#  # for packages on https://repo.anaconda.com/miniconda/
+#  env: MINI_OS="MacOSX"
+#       MINI_ARCH="x86_64"
   
 # not critical of os x fails
 # mainly support linux
