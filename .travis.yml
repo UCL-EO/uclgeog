@@ -74,7 +74,7 @@ install:
   # Without the sudo, I get:
   # Enabling notebook extension rubberband/main...
   #    - Validating: problems found:
-  - /bin/bash sudo ./postBuild 
+  - /bin/bash ./postBuild 
 # command to run tests
 script:
   # this is in test.yml too ... resolve
