@@ -57,14 +57,16 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ];   then  
       export MINI_OS="MacOSX";
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
-      brew update; 
-    elif [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+      brew update;
+    fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
       export MINI_OS="Linux";
       sudo apt update; 
+    fi
 #    elif [ "$TRAVIS_OS_NAME" = "windows" ]; then 
 #      export MINI_OS="Windows";
 #      #sudo apt update; 
-    fi
+#    fi
 
 install:
   # system requirements defined in apt.txt b ut also works for brew
