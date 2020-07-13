@@ -51,23 +51,12 @@ before_install:
   # no support for python 2 here
   export MINI="Miniconda3"
   export MINI_ARCH="x86_64";
-  - if [ "$TRAVIS_OS_NAME" = "osx" ];   then 
-      export MINI_OS="MacOSX"; 
-      # get brew for mac, for unix-y packages
-      # https://brew.sh/
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
-      brew update; 
-    fi
+  export MINI_OS="Linux";
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
-      export MINI_OS="Linux";
       # use apt-get for unix packages
       sudo apt update; 
     fi
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 
-      export MINI_OS="Windows";
-      # use ??? for unix packages
-      #
-    fi   
+
   
 install:
   # system requirements defined in apt.txt b ut also works for brew
