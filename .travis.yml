@@ -18,6 +18,8 @@ env: MINI_OS="Linux"
 #  allow_failures:
 #    - os: osx
 
+os: linux
+
 python:
   - "3.7"
   # for packages on https://repo.anaconda.com/miniconda/
@@ -41,7 +43,6 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ];   then 
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
       brew update  
-      
     fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
       sudo apt update ; 
