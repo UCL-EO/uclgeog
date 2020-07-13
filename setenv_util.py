@@ -61,7 +61,7 @@ class SetenvUtil():
     for i in self.setup.keys():
       n_i = self.setup[i];
       if ( i not in self.ignore):
-        print(f'export {self.pre_env}{i}={n_i}');
+        print(f'export {self.pre_env}{i.upper()}={n_i}');
         
   def info(self):
     print('-'*40)
