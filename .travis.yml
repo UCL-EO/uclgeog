@@ -18,7 +18,12 @@ env: MINI_OS="Linux"
 #  allow_failures:
 #    - os: osx
 
-os: linux
+os: "linux"
+
+jobs:
+  allow_failures:
+    - os: "osx"
+
 
 python:
   - "3.7"
@@ -42,10 +47,10 @@ before_install:
   # assume brew is already installed
   - if [ "$TRAVIS_OS_NAME" = "osx" ];   then 
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
-      brew update  
+      brew update; 
     fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
-      sudo apt update ; 
+      sudo apt update; 
     fi
   
 install:
