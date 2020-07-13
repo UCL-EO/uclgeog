@@ -16,11 +16,16 @@ env: MINI_OS="Linux"
 #  env: MINI_OS="MacOSX"
 #       MINI_ARCH="x86_64"
   
-# not critical of os x fails
-# mainly support linux
-#jobs:
-#  allow_failures:
-#    - os: osx
+
+jobs:
+  allow_failures:
+    - os:
+      - "osx"
+      - "windows"
+    - python:
+      - "3.4"
+      - "3.5"
+      - "3.6"
 
 os: 
   - "linux"
