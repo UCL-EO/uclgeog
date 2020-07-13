@@ -1,0 +1,48 @@
+language: python
+python:
+  - "3.7"
+
+#  - "3.6"      # current default Python on Travis CI
+#
+#   - "2.7"
+#  - "3.4"
+#  - "3.5"
+#   - "2.7"
+#  - "3.4"
+# - "3.5"
+# command to install dependencies
+# conda from https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
+install:
+  - sudo apt update
+  # the apt we use for docker
+  - cat apt.txt | xargs sudo apt-get install
+  
+  # We do this conditionally because it saves us some downloading if the
+  # version is the same.
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+    fi
+  
+  # anaconda
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - source "$HOME/miniconda/etc/profile.d/conda.sh"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  # Useful for debugging any issues with conda
+  - conda info -a
+
+  # set up: uses information from meta.yaml
+  - python setup.py install 
+  # Replace dep1 dep2 ... with your dependencies
+  - conda create -q -n geogucl-test python=$TRAVIS_PYTHON_VERSION
+  - conda config --add channels proflewis
+  - conda activate geogucl-test
+  - python setup.py install
+  - postBuild 
+# command to run tests
+script:
+  # this is in test.yml too ... resolve
+  - python -c "import geogucl"
