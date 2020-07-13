@@ -64,7 +64,8 @@ install:
   # set up: uses information from meta.yaml
   - python setup.py install 
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -n uclgeog python=$TRAVIS_PYTHON_VERSION --file environment.yml
+  # python=$TRAVIS_PYTHON_VERSION
+  - conda env create -n uclgeog --file environment.yml
   - conda activate uclgeog
   - conda config --add channels proflewis
  
