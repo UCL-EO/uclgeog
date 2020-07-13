@@ -76,7 +76,9 @@ install:
   # system requirements defined in apt.txt b ut also works for brew
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat apt.txt | xargs sudo apt-get install; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ;  then cat apt.txt | xargs brew install; fi
-  
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then
+    echo "You will be missing some unix-y packages we might like";
+    fi
   # download miniconda into $HOME/miniconda
   - wget https://repo.continuum.io/miniconda/${MINI}-latest-${MINI_OS}-${MINI_ARCH}.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
