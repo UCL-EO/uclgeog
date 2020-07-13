@@ -96,6 +96,7 @@ install:
   - conda activate uclgeog 
   #- conda config --add channels proflewis
   # make the uclgeog codebase
+  - python -m pip install --user --upgrade setuptools wheel
   - python setup.py install
   - /bin/bash ./postBuild 
   # sort some edits to the notebook
