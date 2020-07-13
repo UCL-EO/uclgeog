@@ -4,6 +4,7 @@ os:
   - "linux"
 # - windows
 # - osx
+
 python:
   - "3.7"
   # for packages on https://repo.anaconda.com/miniconda/
@@ -18,28 +19,17 @@ python:
 # - "3.5"
 # conda from https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/use-conda-with-travis-ci.html
 
-
-jobs:
-  allow_failures:
-    - os: 
-      - "osx"
-      - "windows"
-    - python: 
-      - "3.4"
-      - "3.5"
-      - "3.6"
-
+env: MINI="Miniconda3";
+  MINI_ARCH="x86_64";
+  MINI_OS="Linux";
+  
 before_install:
   # no support for python 2 here
-  export MINI="Miniconda3"
-  export MINI_ARCH="x86_64";
-  export MINI_OS="Linux";
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
       # use apt-get for unix packages
       sudo apt update; 
     fi
 
-  
 install:
   # system requirements defined in apt.txt b ut also works for brew
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat apt.txt | xargs sudo apt-get install; fi
