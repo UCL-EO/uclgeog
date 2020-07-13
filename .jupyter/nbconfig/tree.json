@@ -1,8 +1,0 @@
-{
-  "load_extensions": {
-    "nbextensions_configurator/tree_tab/main": true,
-    "formgrader/main": true,
-    "assignment_list/main": true,
-    "course_list/main": true
-  }
-}
