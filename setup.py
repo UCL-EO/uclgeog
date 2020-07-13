@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 
 """
-from codecs import open
+import setuptools
 from os import path
 import os
 import sys
@@ -62,7 +62,7 @@ except:
 pyver='Python '+".".join([str(sys.version_info.major),str(sys.version_info.minor),str(sys.version_info.micro)])
 print(pyver)
 
-setup(  
+setuptools.setup(  
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
