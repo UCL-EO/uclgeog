@@ -1,5 +1,3 @@
-# need these to be available as apt and brew
-# and choco ideally ...
 vim
 ghostscript
 texlive-fonts-recommended
