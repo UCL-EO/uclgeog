@@ -6,9 +6,6 @@ services:
 env: 
   LANG:   "en_US.UTF-8"
   LC_ALL: "en_US.UTF-8"
-  # put elsewhere
-  DOCKER_PASSWORD: 'maqrej-xutqa0-Fywzew'
-  DOCKER_USERNAME: 'proflewis'
      
 jobs:
   include:
