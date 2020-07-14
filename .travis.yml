@@ -16,7 +16,7 @@ jobs:
         - env
         - sudo apt update; 
         - grep -v '#' < apt.txt | xargs sudo apt-get install
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+        - wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-Linux-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
         - source "$HOME/miniconda/etc/profile.d/conda.sh"
         - hash -r
@@ -29,13 +29,13 @@ jobs:
         - env
         - sudo apt update; 
         - grep -v '#' < apt.txt  | xargs sudo apt-get install
-        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+        - wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.8.3-Linux-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
         - source "$HOME/miniconda/etc/profile.d/conda.sh"
         - hash -r
         # docker prep
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - name: "Python 3.7.4 on macOS"
+    - name: "Python 3.7 on macOS"
       os: osx
       osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
       language: shell       # 'language: python' is an error on Travis CI macOS
@@ -44,11 +44,24 @@ jobs:
         - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
         - brew update
         - grep -v '#' < apt.txt | xargs brew install
-        - wget https://repo.continuum.io/miniconda/Miniconda3-py37_4.8.3-MaxOSX-x86_64.sh -O miniconda.sh;
+        - wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-MacOSX-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
         - source "$HOME/miniconda/etc/profile.d/conda.sh"
         - hash -r
-    - name: "Python 3.8.0 on Windows"
+    - name: "Python 3.8 on macOS"
+      os: osx
+      osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
+      language: shell       # 'language: python' is an error on Travis CI macOS
+      before_install:
+        - source env.sh
+        - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
+        - brew update
+        - grep -v '#' < apt.txt | xargs brew install
+        - wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.8.3-MacOSX-x86_64.sh
+        - bash miniconda.sh -b -p $HOME/miniconda
+        - source "$HOME/miniconda/etc/profile.d/conda.sh"
+        - hash -r
+    - name: "Python 3.8 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: shell       # 'language: python' is an error on Travis CI Windows
       before_install:
