@@ -4,8 +4,7 @@ language: python
 #  - linux
 
 # name for miniconda files in https://repo.continuum.io/miniconda
-env: MINI_OS="Linux"
-     MINI_ARCH="x86_64"
+env: MINI_ARCH="x86_64"
      MINI="Miniconda3"
      LANG="en_US.UTF-8"
      LC_ALL="en_US.UTF-8"
@@ -57,15 +56,18 @@ before_install:
   # https://brew.sh/
   # assume brew is already installed
   - if [ "$TRAVIS_OS_NAME" = "osx" ];   then  
+      env: MINI_OS="MacOSX"
       export MINI_OS="MacOSX";
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
       brew update;
     fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+      env: MINI_OS="Linux"
       export MINI_OS="Linux";
       sudo apt update; 
     fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 
+      env: MINI_OS="Windows"
       export MINI_OS="Windows";
       sudo apt update; 
     fi
