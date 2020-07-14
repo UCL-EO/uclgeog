@@ -51,7 +51,6 @@ try:
 except:
     pass
 
-  
 # Get the long description from the relevant file
 try:
   with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -81,11 +80,11 @@ setuptools.setup(
         'Topic :: Software Development :: Build Tools',
 
         # Pick your license as you wish (should match "license" above)
-        f'License :: OSI Approved :: {license} License',
+        'License :: OSI Approved :: '+license+' License',
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        f'Programming Language :: Python :: {pyver}',
+        'Programming Language :: Python :: '+pyver,
     ],
 
     # What does your project relate to?
