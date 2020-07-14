@@ -49,11 +49,15 @@ jobs:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - name: "Python 3.7 on macOS"
       os: osx
-      osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
+      # https://docs.travis-ci.com/user/reference/osx/
+      # really, for 
+      osx_image: xcode12    # Python 3.7.4 running on macOS 10.15.5
       language: shell       # 'language: python' is an error on Travis CI macOS
       before_install:
         - source env.sh
-        - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
+        # brew included
+        # https://docs.travis-ci.com/user/reference/osx/#homebrew
+        #- /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
         - brew update
         - grep -v '#' < apt.txt | xargs brew install
         - wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-MacOSX-x86_64.sh -O miniconda.sh;
@@ -62,11 +66,14 @@ jobs:
         - hash -r
     - name: "Python 3.8 on macOS"
       os: osx
-      osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
+      # https://docs.travis-ci.com/user/reference/osx/
+      osx_image: xcode12   # Python 3.7.4 running on macOS 10.15.5
       language: shell       # 'language: python' is an error on Travis CI macOS
       before_install:
         - source env.sh
-        - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
+        # brew included
+        # https://docs.travis-ci.com/user/reference/osx/#homebrew
+        #- /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
         - brew update
         - grep -v '#' < apt.txt | xargs brew install
         - wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.8.3-MacOSX-x86_64.sh
