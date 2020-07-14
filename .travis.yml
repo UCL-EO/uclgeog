@@ -18,7 +18,7 @@ jobs:
         - source env.sh
         - env
         - sudo apt update; 
-        - cat apt.txt | xargs sudo apt-get install
+        - grep -v '#' < apt.txt | xargs sudo apt-get install
         - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
         - source "$HOME/miniconda/etc/profile.d/conda.sh"
@@ -31,7 +31,7 @@ jobs:
         - source env.sh
         - env
         - sudo apt update; 
-        - cat apt.txt | xargs sudo apt-get install
+        - grep -v '#' < apt.txt  | xargs sudo apt-get install
         - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
         - source "$HOME/miniconda/etc/profile.d/conda.sh"
@@ -46,7 +46,7 @@ jobs:
         - source env.sh
         - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
         - brew update
-        - cat apt.txt | xargs brew install
+        - grep -v '#' < apt.txt | xargs brew install
         - wget https://repo.continuum.io/miniconda/Miniconda3-py37_4.8.3-MaxOSX-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
         - source "$HOME/miniconda/etc/profile.d/conda.sh"
