@@ -57,8 +57,6 @@ install:
   - conda update -q conda
   # Useful for debugging any issues with conda
   - conda info -a
-  # set up: uses information from env.sh
-  #- python setup.py install 
   # Replace dep1 dep2 ... with your dependencies
   # python=$TRAVIS_PYTHON_VERSION
   - conda env create -n uclgeog --file environment.yml
@@ -66,7 +64,8 @@ install:
   #- conda config --add channels proflewis
   # make the uclgeog codebase
   - python -m pip install --user --upgrade setuptools wheel
-  - python setup.py install
+  # set up: uses information from env.sh
+  #- python setup.py install
   - /bin/bash ./postBuild 
   # sort some edits to the notebook
   - python uclgeog/sort_notebook.py
