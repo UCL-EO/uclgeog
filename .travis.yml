@@ -15,7 +15,6 @@ env: MINI_ARCH="x86_64"
 #  # for packages on https://repo.anaconda.com/miniconda/
 #  env: MINI_OS="MacOSX"
 #       MINI_ARCH="x86_64"
-  
 
 jobs:
   allow_failures:
@@ -26,16 +25,29 @@ jobs:
       - "3.4"
       - "3.5"
       - "3.6"
-
+  include:
+    - name: "Python 3.7.0 on Xenial Linux"
+      python: 3.7           # this works for Linux but is ignored on macOS or Windows
+    - name: "Python 3.8.0 on Xenial Linux"
+      python: 3.8           # this works for Linux but is ignored on macOS or Windows
+    - name: "Python 3.7.4 on macOS"
+      os: osx
+      osx_image: xcode11.2  # Python 3.7.4 running on macOS 10.14.4
+      language: shell       # 'language: python' is an error on Travis CI macOS
+    - name: "Python 3.8.0 on Windows"
+      os: windows           # Windows 10.0.17134 N/A Build 17134
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      before_install:
+        - choco install python --version 3.8.0
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
 os: 
   - "linux"
   - "osx"
 # - windows
 # - osx
 
-python:
-  - "3.7"
-  - "3.8"
+
   # for packages on https://repo.anaconda.com/miniconda/
 #  - "3.6"      # current default Python on Travis CI
 #
@@ -56,33 +68,24 @@ before_install:
   # https://brew.sh/
   # assume brew is already installed
   - if [ "$TRAVIS_OS_NAME" = "osx" ];   then  
-      env: MINI_OS="MacOSX"
       export MINI_OS="MacOSX";
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
       brew update;
     fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
-      env: MINI_OS="Linux"
       export MINI_OS="Linux";
       sudo apt update; 
     fi
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then 
-      env: MINI_OS="Windows"
       export MINI_OS="Windows";
-      sudo apt update; 
     fi
-#    elif [ "$TRAVIS_OS_NAME" = "windows" ]; then 
-#      export MINI_OS="Windows";
-#      #sudo apt update; 
-#    fi
 
 install:
+  - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
   # system requirements defined in apt.txt b ut also works for brew
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cat apt.txt | xargs sudo apt-get install; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ] ;  then cat apt.txt | xargs brew install; fi
-  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then
-    echo "You will be missing some unix-y packages we might like";
-    fi
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then cat apt.txt | xargs choco install; fi
   # download miniconda into $HOME/miniconda
   - wget https://repo.continuum.io/miniconda/${MINI}-latest-${MINI_OS}-${MINI_ARCH}.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
@@ -108,7 +111,8 @@ install:
   - pwd
   - ls
   - cat ${HOME}/.jupyter/jupyter_notebook_config.json
+  
 # command to run tests
 script:
   # this is in test.yml too ... resolve
-  - python -c "import uclgeog"
+  - python -c "import uclgeog" || echo "Not done"
