@@ -58,7 +58,7 @@ install:
   # Useful for debugging any issues with conda
   - conda info -a
   # set up: uses information from env.sh
-  - python setup.py install 
+  #- python setup.py install 
   # Replace dep1 dep2 ... with your dependencies
   # python=$TRAVIS_PYTHON_VERSION
   - conda env create -n uclgeog --file environment.yml
