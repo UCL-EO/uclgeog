@@ -3,9 +3,12 @@ sudo: required
 services:
   - docker
 
-env: LANG="en_US.UTF-8"
-     LC_ALL="en_US.UTF-8"
-     #COMPOSE_VERSION: 1.4.1
+env: 
+  LANG:   "en_US.UTF-8"
+  LC_ALL: "en_US.UTF-8"
+  COMPOSE_VERSION: 1.4.1
+  DOCKER_PASSWORD: 'maqrej-xutqa0-Fywzew'
+  DOCKER_USERNAME: 'proflewis'
      
 jobs:
   include:
