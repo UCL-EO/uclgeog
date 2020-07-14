@@ -1,5 +1,6 @@
+# need these to be available as apt and brew
+# and choco ideally ...
 vim
-dvipng
 ghostscript
 texlive-fonts-recommended
 texlive-generic-recommended
