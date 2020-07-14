@@ -1,3 +1,5 @@
+# try to make this consistent for brew, apt-get and choco
+# wouldnt that be nice ...
 vim
 ghostscript
 texlive-fonts-recommended
