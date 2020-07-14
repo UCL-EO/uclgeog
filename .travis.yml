@@ -76,4 +76,4 @@ install:
 # command to run tests
 script:
   # this is in test.yml too ... resolve
-  - python -c "import uclgeog" || echo "Not done"
+  - python -c "import gdal" || echo "No gdal!"
