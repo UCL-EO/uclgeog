@@ -10,7 +10,7 @@ jobs:
         - env
         - sudo apt update; 
         - cat apt.txt | xargs sudo apt-get install
-        - curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
     - name: "Python 3.8.0 on Xenial Linux"
       python: 3.8           # this works for Linux but is ignored on macOS or Windows
@@ -19,7 +19,7 @@ jobs:
         - env
         - sudo apt update; 
         - cat apt.txt | xargs sudo apt-get install
-        - curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
     - name: "Python 3.7.4 on macOS"
       os: osx
@@ -30,7 +30,7 @@ jobs:
         - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; 
         - brew update
         - cat apt.txt | xargs brew install
-        - curl https://repo.continuum.io/miniconda/Miniconda3-py37_4.8.3-MaxOSX-x86_64.sh -O miniconda.sh;
+        - wget https://repo.continuum.io/miniconda/Miniconda3-py37_4.8.3-MaxOSX-x86_64.sh -O miniconda.sh;
         - bash miniconda.sh -b -p $HOME/miniconda
     - name: "Python 3.8.0 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -39,7 +39,7 @@ jobs:
         #- source env.sh
         - choco install python --version 3.8.0
         - python -m pip install --upgrade pip
-        - curl https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe -O miniconda.exe
+        - curl https://repo.continuum.io/miniconda/Miniconda3-latest-Windows-x86_64.exe -o miniconda.exe
         # https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html
         - start /wait "" miniconda.exe /InstallationType=JustMe /S /D=%UserProfile%\Miniconda3
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
